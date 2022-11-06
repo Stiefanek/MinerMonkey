@@ -2,7 +2,7 @@
 {
     public static class ModHelperData
     {
-        public const string Version = "1.1.0";
+        public const string Version = "1.1.3";
         public const string Name = "MinerMonkey";
         public const string Description =
             "The crazy scientist Pyromanic developed the Miner Monkey to perfection.";

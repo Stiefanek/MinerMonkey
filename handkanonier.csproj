@@ -7,8 +7,8 @@
     <ProjectGuid>{79C877BD-1FE0-4518-91EA-DD88B4942846}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Monkeyminer</RootNamespace>
-    <AssemblyName>Monkeyminer</AssemblyName>
+    <RootNamespace>handkanonier</RootNamespace>
+    <AssemblyName>handkanonier</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,16 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\BloonsTD6\MelonLoader\net6\0Harmony.dll</HintPath>
-    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\BloonsTD6\MelonLoader\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="BloonsTD6 Mod Helper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BloonsTD6 Mod Helper, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\BloonsTD6\Mods\BloonsTD6 Mod Helper.dll</HintPath>
+      <HintPath>..\..\..\BloonsTD6 Mod Helper.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\BloonsTD6\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
@@ -51,13 +49,14 @@
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\BloonsTD6\MelonLoader\Managed\Il2CppSystem.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="MelonLoader">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\BloonsTD6\MelonLoader\net6\MelonLoader.dll</HintPath>
+    <Reference Include="MelonLoader, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\BloonsTD6\MelonLoader\MelonLoader.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Runtime" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -226,8 +225,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ModHelperData.cs" />
-    <Compile Include="ProjectileDisplays.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -240,73 +237,33 @@
     <EmbeddedResource Include="TowerImg\Handkanonier_Portrait.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MinerPickDisplay.png" />
+    <EmbeddedResource Include="TowerImg\TopPath\EnlargedShots_Icon.png" />
+    <EmbeddedResource Include="TowerImg\TopPath\HeavyBlasts_Icon.png" />
+    <EmbeddedResource Include="TowerImg\TopPath\HeavyBlasts_Portrait.png" />
+    <EmbeddedResource Include="TowerImg\TopPath\NadeOptimizer_Icon.png" />
+    <EmbeddedResource Include="TowerImg\TopPath\T101Feldhaubitz_Icon.png" />
+    <EmbeddedResource Include="TowerImg\TopPath\TheBigBang_Icon.png" />
+    <EmbeddedResource Include="TowerImg\TopPath\TheBigBang_Portrait.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Penny100.png" />
+    <EmbeddedResource Include="TowerImg\TopPath\T101Feldhaubitz_Portrait.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TowerImg\MiddlePath\woodenpickaxe.png" />
+    <EmbeddedResource Include="TowerImg\BottomPath\EMB_Icon.png" />
+    <EmbeddedResource Include="TowerImg\BottomPath\NimbleHands_Icon.png" />
+    <EmbeddedResource Include="TowerImg\BottomPath\T102Jagdfaust_Icon.png" />
+    <EmbeddedResource Include="TowerImg\BottomPath\TacticalLobber_Icon.png" />
+    <EmbeddedResource Include="TowerImg\BottomPath\Zerfallen_Icon.png" />
+    <EmbeddedResource Include="TowerImg\BottomPath\Zerfallen_Portrait.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TowerImg\MiddlePath\stonepickaxe.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TowerImg\MiddlePath\ironpickaxe.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TowerImg\MiddlePath\diamondpickaxe.png" />
-    <EmbeddedResource Include="TowerImg\MiddlePath\netheritepickaxe.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TowerImg\TopPath\Penny100.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="diamond.png" />
-    <EmbeddedResource Include="iron.png" />
-    <EmbeddedResource Include="netherite.png" />
-    <EmbeddedResource Include="stone.png" />
-    <EmbeddedResource Include="wooden.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Banhammer.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TowerImg\MiddlePath\Banhammer.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TowerImg\MiddlePath\efficiency5.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="efficiency5.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TowerImg\steve.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TowerImg\TopPath\what.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TowerImg\TopPath\college.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TowerImg\TopPath\ninja.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TowerImg\TopPath\job.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="texture.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="TowerImg\BottomPath\alien.png" />
-    <EmbeddedResource Include="TowerImg\BottomPath\bitsoil.png" />
-    <EmbeddedResource Include="TowerImg\BottomPath\Crash.png" />
-    <EmbeddedResource Include="TowerImg\BottomPath\diamond.png" />
-    <EmbeddedResource Include="TowerImg\BottomPath\dogecoin.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="investor.png" />
+    <EmbeddedResource Include="TowerImg\MiddlePath\Adaptive_Icon.png" />
+    <EmbeddedResource Include="TowerImg\MiddlePath\BouncyShots_Icon.png" />
+    <EmbeddedResource Include="TowerImg\MiddlePath\BouncyShots_Portrait.png" />
+    <EmbeddedResource Include="TowerImg\MiddlePath\ExplosivesSpecialist_Icon.png" />
+    <EmbeddedResource Include="TowerImg\MiddlePath\ExplosivesSpecialist_Portrait.png" />
+    <EmbeddedResource Include="TowerImg\MiddlePath\QuickdrawSight_Icon.png" />
+    <EmbeddedResource Include="TowerImg\MiddlePath\Tenacious_Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -24,7 +24,7 @@ using Assets.Scripts.Unity.UI_New.InGame;
 using Assets.Scripts.Unity.UI_New.InGame.StoreMenu;
 using Assets.Scripts.Unity.UI_New.Upgrade;
 using Assets.Scripts.Utils;
-using Harmony;
+using HarmonyLib;
 using Il2CppSystem.Collections.Generic;
 using MelonLoader;
 
@@ -44,7 +44,6 @@ using BTD_Mod_Helper.Api.Towers;
 using MinerMonkey;
 using MinerMonkey.Displays.Projectiles;
 using BTD_Mod_Helper.Api.Display;
-
 
 namespace MinerMonkey
 {
@@ -341,7 +340,7 @@ namespace MinerMonkey
             public override string Name => "Bitsoil";
             public override string DisplayName => "Bitsoil";
             public override string Description => "EW";
-            public override int Cost => 10000;
+            public override int Cost => 1;
             public override int Path => BOTTOM;
             public override int Tier => 1;
             public override void ApplyUpgrade(TowerModel towerModel)
@@ -361,7 +360,7 @@ namespace MinerMonkey
             public override string Name => "CrashtheMarket";
             public override string DisplayName => "Crash the Market";
             public override string Description => "Hard work pays off";
-            public override int Cost => 15000;
+            public override int Cost => 100000;
             public override int Path => BOTTOM;
             public override int Tier => 2;
             public override void ApplyUpgrade(TowerModel towerModel)
@@ -386,7 +385,7 @@ namespace MinerMonkey
             public override string Name => "Diamondcoin";
             public override string DisplayName => "Diamond coin";
             public override string Description => "Worth more than your whole house";
-            public override int Cost => 25000;
+            public override int Cost => 100000;
             public override int Path => BOTTOM;
             public override int Tier => 3;
             public override void ApplyUpgrade(TowerModel towerModel)
@@ -434,7 +433,7 @@ namespace MinerMonkey
             public override string Name => "AlienCoin";
             public override string DisplayName => "AlienCoin";
             public override string Description => "How did you buy this?";
-            public override int Cost => 150000000;
+            public override int Cost => 100000000;
             public override int Path => BOTTOM;
             public override int Tier => 5;
             public override void ApplyUpgrade(TowerModel towerModel)
@@ -460,19 +459,11 @@ namespace MinerMonkey
         }
         public class ParagonDisplay : ModTowerDisplay<MinerMonkey>
         {
-            public override string BaseDisplay => GetDisplay(TowerType.DartMonkey, 0, 0, 0);
+            public override string BaseDisplay => GetDisplay(TowerType.DartMonkey);
 
-            public override bool UseForTower(int[] tiers)
+            public override bool UseForTower(int[] tiers) => IsParagon(tiers);
 
-            {
-                return IsParagon(tiers);
-            }
 
-                public override void ModifyDisplayNode(UnityDisplayNode node)
-            {
-
-                node.RemoveBone("SuperMonkeyRig:Dart");
-            }
             public class Cosmicinvestor : ModParagonUpgrade<MinerMonkey>
             {
                 public override int Cost => 1000000000;
@@ -482,15 +473,11 @@ namespace MinerMonkey
 
                 public override void ApplyUpgrade(TowerModel towerModel)
                 {
-                    towerModel.RemoveBehaviors<AttackModel>();
-
-                    //Create Banana Gun
+                    AttackModel attackModel = towerModel.GetBehavior<AttackModel>();
+                    var projectile = attackModel.weapons[0].projectile;
                     var banhamer = Game.instance.model.GetTowerFromId("SpikeFactory").GetAttackModel().Duplicate();
                     var banhamerWeapon = banhamer.weapons[0];
                     var banhamerProj = banhamer.weapons[0].projectile;
-                    AttackModel attackModel = towerModel.GetBehavior<AttackModel>();
-
-                    //Edit Banana Gun Attack Model
                     banhamer.RemoveBehavior<TargetTrackModel>();
                     banhamer.AddBehavior(new TargetFirstModel("TargetFirstModel_", true, false));
                     banhamer.AddBehavior(new TargetStrongModel("TargetStrongModel_", true, false));
@@ -499,7 +486,7 @@ namespace MinerMonkey
                     banhamer.AddBehavior(new RotateToTargetModel("RotateToTargetModel_", true, true, true, 1, true, true));
                     banhamer.attackThroughWalls = true;
 
-                    //Edit Banana Gun Weapon Model
+
                     banhamerWeapon.fireWithoutTarget = false;
                     banhamerWeapon.rate = 0f;
                     banhamerProj.RemoveBehavior<DamageModel>();
@@ -518,23 +505,26 @@ namespace MinerMonkey
                     towerModel.range = 100000;
                     banhamer.range = towerModel.range;
                     towerModel.isGlobalRange = true;
-                    towerModel.AddBehavior(banhamer);
                     towerModel.AddBehavior(BananaFarmAttackModel);
 
+                    towerModel.AddBehavior(banhamer);
+                    towerModel.AddBehavior(Game.instance.model.GetTowerFromId("BananaFarm-005").GetBehavior<CollectCashZoneModel>().Duplicate());
                     towerModel.AddBehavior(new MonkeyCityIncomeSupportModel("_MonkeyCityIncomeSupport", true, 9999999f, null, "MonkeyCityBuff", "BuffIconVillagexx4"));
                     towerModel.AddBehavior(new OverrideCamoDetectionModel("OverrideCamoDetectionModel_", true));
                     towerModel.GetDescendants<FilterInvisibleModel>().ForEach(model => model.isActive = false);
-
 
                 }
                 public override string Icon => "investor";
                 public override string Portrait => "investor";
             }
+        }
+    }
 
 
 
 
-            [HarmonyPatch(typeof(InGame), "Update")]
+
+    [HarmonyPatch(typeof(InGame), "Update")]
             public class Update_Patch
             {
                 [HarmonyPostfix]
@@ -566,5 +556,3 @@ namespace MinerMonkey
 
 
         }
-    }
-}
